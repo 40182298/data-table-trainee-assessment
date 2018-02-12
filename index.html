@@ -1,19 +1,89 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
+    <title>BBC Coding Exercise</title>
 <meta charset="utf-8" />
 <meta http-equiv="content-language" content="en" />
 <meta http-equiv="Content-Type" content="UTF-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
 <link href="main.css" media="all" rel="stylesheet" type="text/css" />
+
+<script src="jquery-2.1.1.js" type="text/javascript"></script>
+<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js'></script>
+
 </head>
-<body>
-<script src="jquery-2.1.1.js"></script>
+    <body>
+        
+    <div class=' container'>
+            <div class='table-responsive'>
+                <img src="https://www.logodesignlove.com/images/evolution/bbc-logo-design.gif"/>
+                <h1 align="center">BBC Broadcasts 2009</h1>
+                
+            <br/>
+            <table id="bbc_table" align="center" >
+    	
+            </table>
+            
+            </div>
+        </div>
+  </body>
+</html>     
+        
 <script>
-$.getJSON('data.json', function (data) {
-    console.log(data);
-});
+    $(document).ready(function(){
+        $.getJSON("data.json", function(data){
+           // console.log(data);
+            var bbc_data = '<tr><th>Date</th><th>BBC One</th><th>BBC Two</th> <th>BBC Three</th><th>BBC Four</th><th>BBC News 24</th><th>CBBC</th><th>Cbeebies</th></tr>';
+            
+            $.each(data, function(key, value){
+		
+			  //console.log('the date: ' + key + ' ' ); 
+			  //https://www.sitepoint.com/jquery-each-function-examples/
+			  
+			  var mydate = key+"-01";
+			 // console.log('the date: ' + mydate + ' ' ); 
+			  
+			  var convert = new Date(mydate);
+			  // console.log('the date: ' + convert + ' ' ); 
+			   
+			   
+			//  console.log('the date: ' + convert.getFullYear() + ' - ' +  convert.getMonth() ); 
+			  
+			  //https://stackoverflow.com/questions/1643320/get-month-name-from-date
+			  var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+				console.log(convert.getMonth());
+				
+				var printdate = monthNames[convert.getMonth()] +" "+ convert.getFullYear();
+				
+			 //var printdate =  monthNames[convert.getMonth()] + ' ' +  convert.getFullYear();
+			  //var res = rightNow.toISOString().slice(0,10).replace(/-/g,"");
+               
+				bbc_data += '<tr>';
+         
+               /* var dateObj = new Date();
+                var month = dateObj.getUTCMonth()+1; //months from 1-12
+                var year= dateObj.getUTCFullYear();
+                newdate = year + "/" + month;*/
+              
+                bbc_data += '<td>' + printdate + '</td>';     
+                bbc_data += '<td>' +value.bbcone+ '</td>';
+                bbc_data += '<td>' +value.bbctwo+ '</td>';
+                bbc_data += '<td>' +value.bbcthree+ '</td>';
+                bbc_data += '<td>' +value.bbcfour+ '</td>';
+                bbc_data += '<td>' +value.bbcnews24+ '</td>';
+                bbc_data += '<td>' +value.cbbc+ '</td>';
+                bbc_data += '<td>' +value.cbeebies+ '</td>';
+                
+                bbc_data +='</tr>';
+            });
+			
+			
+           $('#bbc_table').append(bbc_data);
+           // console.log(bbc_data);
+            
+        });
+    });
+    
+    
 </script>
-</body>
-</html>
