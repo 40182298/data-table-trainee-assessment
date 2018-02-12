@@ -1,3 +1,47 @@
 /*
   Start adding CSS here
 */
+
+
+table, td, th {
+border:1px solid #ddd; 
+text-align:left;
+
+}
+
+table{
+border-collapse: collapse;
+width: 80%;
+
+
+}
+
+th,td{
+text-align:left;
+padding:8px;
+
+}
+
+th{
+    background-color:#D3D3D3;
+    text-align: center;
+}
+
+tr:nth-child(odd){
+    background-color:#DCDCDC;
+    
+}
+
+tr{
+    background-color: white;
+}
+
+img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.font{
+    font-family: Segoe UI;
+}
